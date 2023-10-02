@@ -12,16 +12,16 @@ class Order extends Model
     protected $fillable = [
         'item_id',
         'customer_id',
+        'proof_of_payment'
     ];
 
-    public function item()
-    {
-        return $this->belongsTo(Item::class);
-    }
+public function item() {
+    return $this->belongsTo('App\Item', 'item_id', 'id');
+}
 
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
+public function customer() {
+    return $this->belongsTo('App\Customer', 'customer_id' , 'id');
+}
+
 
 }

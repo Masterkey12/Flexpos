@@ -44,6 +44,10 @@ class Item extends AppModel
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function orders() {
+        return $this->hasMany('App\Order', 'item_id', 'id')->orderBy('id', 'DESC');
+    }
+
     public function saveItem($input)
     {
 
@@ -70,25 +74,17 @@ class Item extends AppModel
         $result = false;
         foreach ($saleItems as $value) {
             $item = $this->find($value->item_id);
-            if (($item->quantity < $value->quantity || $item->stock_limit < $value->quantity) && $value->quantity !== 0) {
+            if ($item->quantity < $value->quantity) {
                 $result = true;
             }
         }
         return $result;
     }
     
-    public function check($saleItems)
-{
-    foreach ($saleItems as $value) {
-        $item = $this->find($value->item_id);
+    
+    
+    
 
-        if ($item->quantity < $value->quantity && $value->quantity !== 0) {
-            return false; // Quantité demandée supérieure à la quantité disponible
-        }
-    }
-
-    return true; // Tous les articles ont un stock suffisant
-}
 
     
     public function updateItemQty($item_id, $qty, $attribute_id = null)
@@ -134,6 +130,10 @@ class Item extends AppModel
         $item = $this->findOrFail($id);
         return $item;
     }
+
+
+
+
 
     public function getStockLimit($items)
     {

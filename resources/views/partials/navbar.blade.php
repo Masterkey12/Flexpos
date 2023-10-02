@@ -33,12 +33,16 @@
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
           @if (Auth::guest())
-			<li><a href="{{ url('/login') }}">{{__('Login')}}</a></li>
-    @else
-
+          <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn btn-primery">{{__('Deconnexion')}}</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                  </form>
+             @else
+        @if(auth()->user()->checkSpPermission('sales.create'))
           <li class="{{(Request::is('sales/create')) ? 'active' : ''}}">
               <a href="{{ url('sales/create') }}"><strong><i class="fa fa-file-text-o"></i> </strong></a>
           </li>
+        @endif
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ !empty(Auth::user()->avatar) ? Auth::user()->fileUrl('avatar') : asset('dist/img/avatar.png')}}" class="user-image" alt="User Image">

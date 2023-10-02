@@ -11,7 +11,11 @@
         @if(auth()->user()->checkSpPermission('planning.index'))
         <li class="{{(Request::is('planning')) ? 'active' : ''}} "><a href="{{ url('/planning/all') }}"><i class="fa fa-truck"></i> <span>{{('Livraison')}}</span></a></li>
         @endif
-        
+
+        @if(auth()->user()->checkSpPermission('planning.index'))
+        <li class="{{(Request::is('Orders')) ? 'active' : ''}} "><a href="{{ url('/admin/orders') }}"><i class="fa fa-check"></i> <span>{{('Commandes')}}</span></a></li>
+        @endif
+
       @if(auth()->user()->checkSpPermission('customers.index'))
         <li class="{{(Request::is('customers')) ? 'active' : ''}} "><a href="{{ url('/customers') }}"><i class="fa fa-users"></i> <span>{{trans('menu.customers')}}</span></a></li>
       @endif
@@ -26,15 +30,15 @@
 
       @if(auth()->user()->checkSpPermission('receivings.index') || auth()->user()->checkSpPermission('receivings.create'))
       <li class="{{(Request::is('receivings') || Request::is('receivings/create')) ? 'active' : ''}} treeview">
-          <a href="#"><i class="fa fa-sitemap"></i> <span>{{__('Commandes')}}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+          <a href="#"><i class="fa fa-sitemap"></i> <span>{{__('Receptions')}}</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
           <ul class="treeview-menu">
               @if(auth()->user()->checkSpPermission('receivings.index'))
               <li class="{{(Request::is('receivings')) ? 'active' : ''}} ">
-                  <a href="{{ url('/receivings') }}"><i class="fa fa-circle-o"></i> <span>{{__('Liste des Commandes')}}</span></a>
+                  <a href="{{ url('/receivings') }}"><i class="fa fa-circle-o"></i> <span>{{__('Liste de reception')}}</span></a>
               </li>
               @endif
               @if(auth()->user()->checkSpPermission('receivings.create'))
-                <li class="{{(Request::is('receivings/create')) ? 'active' : ''}} "><a href="{{ url('/receivings/create') }}"><i class="fa fa-circle-o"></i> <span>{{__('Créer une Commande')}}</span></a></li>
+                <li class="{{(Request::is('receivings/create')) ? 'active' : ''}} "><a href="{{ url('/receivings/create') }}"><i class="fa fa-circle-o"></i> <span>{{__('Créer un bon')}}</span></a></li>
               @endif
           </ul>
 </li>

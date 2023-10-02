@@ -112,7 +112,14 @@ Route::group(['middleware' => 'languange'], function () {
     Route::get('/customer/showlogin', 'CustomerLoginController@showLoginForm')->name('Show-login');
 
     Route::get('/products', 'ProductController@index')->name('products.index');
-    Route::post('/orders', 'OrderController@store')->name('orders.store');
+    
+    // Dans routes/web.php
+    Route::get('/orders/{order}/upload-proof', 'OrderController@showUploadProofForm')->name('orders.show_upload_proof_form');
+    Route::post('/orders/{order}/upload-proof', 'OrderController@uploadProof')->name('orders.upload_proof');
+
+
+    Route::get('/payment-history', 'PaymentController@index')->name('payment.history');
+    Route::get('/admin/orders', 'AdminController@getOrders')->name('admin.orders');
 
 
 
@@ -120,7 +127,7 @@ Route::group(['middleware' => 'languange'], function () {
 
 
 
-
+Route::post('/orders', 'OrderController@store')->name('orders.store');
 
 
 

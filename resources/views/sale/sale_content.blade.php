@@ -142,11 +142,8 @@
                                             <button type="submit" class="btn btn-success btn-block">{{__('Refund Sale')}}</button>
                                         </div>
                                     @else
-                                        <div class="col-sm-7 col-md-6">
+                                        <div class="col-sm-7 col-md-10">
                                             <button type="submit" class="btn btn-success btn-block">{{trans('sale.submit')}}</button>
-                                        </div>
-                                        <div class="col-sm-5 col-md-6">
-                                            <button type="button" id="holdSale" class="btn btn-warning btn-block">{{__('Maintenir')}}</button>
                                         </div>
                                     @endif
                                 </div>

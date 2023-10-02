@@ -42,4 +42,31 @@ class OrderController extends Controller
     }
 }
 
+// Dans OrderController.php
+
+public function showUploadProofForm(Order $order)
+{
+    return view('orders.upload_proof', compact('order'));
 }
+
+public function uploadProof(Request $request, Order $order)
+{
+    // Vérifier si un fichier de preuve de paiement a été téléchargé
+    if ($request->hasFile('proof_of_payment')) {
+        // Gérer le téléchargement de la preuve de paiement
+        $proofOfPayment = $request->file('proof_of_payment');
+        $proofOfPaymentPath = $proofOfPayment->store('public/proofs_of_payment');
+
+        // Associer la preuve de paiement à la commande
+        $order->proof_of_payment = $proofOfPaymentPath;
+
+        $order->save();
+
+        return redirect('/home')->with('success', 'Preuve de paiement envoyée avec succès');
+    } else {
+        return redirect('/home')->with('error', 'Aucun fichier de preuve de paiement téléchargé');
+    }
+}
+ 
+}
+

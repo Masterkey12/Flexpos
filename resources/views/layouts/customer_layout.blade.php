@@ -40,7 +40,7 @@
 
     @include('partials.navbar')
     <!-- Left side column. contains the logo and sidebar -->
-    @include('partials.sidebar')
+    @include('partials.new_sidebar')
 
     <!-- Content Wrapper. Contains page content -->
     @yield('content')
@@ -54,7 +54,6 @@
   </div>
 <!-- ./wrapper -->
 <!-- notify js -->
-@include('partials.notify')
 
 <!-- page script -->
 <script src="{{asset('js/main.js')}}"></script>

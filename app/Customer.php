@@ -21,7 +21,7 @@ class Customer extends AppModel implements AuthenticatableContract, CanResetPass
     protected $redirectTo = '/home';
     protected $guard_name = 'web_customers';
     protected $table = 'customers';
-    
+
     const WALKING_CUSTOMER = "Walking Customer";
 
     protected $fillable = ['name', 'email', 'phone_number', 'prev_balance', 'payment','types','password'];
@@ -56,6 +56,11 @@ class Customer extends AppModel implements AuthenticatableContract, CanResetPass
             $customer->payment = $customer->payment + $payment;
         }
         $customer->update();
+    }
+
+
+    public function orders() {
+        return $this->hasMany('App\Order', 'customer_id');
     }
 
     public function getAll($option = null, $search = null)

@@ -56,6 +56,12 @@
                     {{ Form::text('quantity', null, ['class' => 'form-control']) }}
                     </div>
                 </div>
+                <div class="form-group row" id="stock_limit">
+                    {{ Form::label('stock_limit', trans('Stock Limite'), ['class'=>'col-sm-3 text-right']) }}
+                    <div class="col-sm-9"> 
+                    {{ Form::text('tock_limit', null, ['class' => 'form-control']) }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
