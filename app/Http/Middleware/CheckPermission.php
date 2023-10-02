@@ -19,15 +19,7 @@ class CheckPermission
     public function handle($request, Closure $next)
     {
         $current_url = $request->route()->uri();
-        if(! $this->isInstallUrl($current_url) && ! $this->checkInstalled()) {
-            return redirect('/install');
-        }
-        if ($current_url == 'login') {
-            if(!$this->checkSys()) {
-                return redirect('/install');
-            }
-        }
-        if ($current_url == '/' || $current_url == 'home'|| $current_url == 'login' || $this->isInstallUrl($current_url)) {
+        if ($current_url == '/' || $current_url == 'home'|| $current_url == 'login') {
             return $next($request);
         }
         
@@ -71,11 +63,4 @@ class CheckPermission
         return $result;
     }
 
-    public function isInstallUrl($current_url){
-        $install_urls = ['install', 'install/requirements', 'install/permissions', 'install/environment', 'install/environment/wizard', 'install/environment/saveWizard', 'install/database', 'install/final', 'install/environment/saveNewWizard'];
-        if(in_array($current_url, $install_urls)) {
-            return true;
-        } 
-        return false;
-    }
 }

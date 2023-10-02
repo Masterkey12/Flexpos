@@ -35,11 +35,10 @@
           @if (Auth::guest())
 			<li><a href="{{ url('/login') }}">{{__('Login')}}</a></li>
     @else
-        @if(auth()->user()->checkSpPermission('sales.create'))
+
           <li class="{{(Request::is('sales/create')) ? 'active' : ''}}">
               <a href="{{ url('sales/create') }}"><strong><i class="fa fa-file-text-o"></i> </strong></a>
           </li>
-        @endif
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ !empty(Auth::user()->avatar) ? Auth::user()->fileUrl('avatar') : asset('dist/img/avatar.png')}}" class="user-image" alt="User Image">
@@ -58,14 +57,12 @@
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-6 text-center">
-                    @if(Auth::user()->checkSpPermission('flexiblepossetting.create'))
+                    
                     <a href="{{route('flexiblepossetting.create')}}">{{__('Parametres')}}</a>
-                    @endif
                   </div>
                   <div class="col-xs-6 text-center">
-                    @if(Auth::user()->checkSpPermission('flexiblepossetting.create'))
+                   
                     <a href="{{route('permissions.list')}}">{{__('Permissions')}}</a>
-                    @endif
                   </div>
                 </div>
                 <!-- /.row -->

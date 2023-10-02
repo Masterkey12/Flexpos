@@ -14,7 +14,10 @@ class CustomerLoginController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     protected $redirectTo = '/home';
+     protected $provider = 'customers';
      
+ 
 
     public function index()
     {
@@ -57,16 +60,18 @@ class CustomerLoginController extends Controller
 
 
     public function customerLogin(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-    
-        if (Auth::guard('web_customers')->attempt($credentials)) {
-            return redirect()->route('home'); // Redirection vers le dashboard du client
-        }
-    
-        // En cas d'échec de l'authentification
-        return redirect()->back()->withErrors(['message' => 'Identifiants incorrects']);
+{
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::guard('web_customers')->attempt($credentials)) {
+        return redirect()->route('products.index'); // Redirection vers la page des produits
     }
+
+    return redirect()->back()->withErrors(['message' => 'Identifiants incorrects']);
+}
+
+    
+    
     
     
 

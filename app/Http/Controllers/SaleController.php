@@ -179,8 +179,12 @@ class SaleController extends Controller
             return $this->sendCommonResponse([], ['danger' => __('Please Add some Items to create sale!')]);
         }
         if ($this->item->checkItemStock($saleItems)) {
-            return $this->sendCommonResponse([], ['danger' => __('Stock Insufissant, Veuillez réapprovisionner le stock!')]);
+            return $this->sendCommonResponse([], ['danger' => __('Stock Insufissant, Veuillez réapprovisionner le stock Ou Superieur à la Quantité presente dans le stock')]);
         }
+        elseif ($this->item->check($saleItems)) {
+            return $this->sendCommonResponse([], ['danger' => __('la Quantité presente dans le stock')]);
+        }
+
         $input['user_id'] = Auth::user()->id;
         if ($refund) {
             $sale = $salesObj->processSale($input, $saleItems, $hold = false, $refund = true);

@@ -8,6 +8,10 @@
       
         <li class=""><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> <span>{{trans('menu.dashboard')}}</span></a></li>
 
+        @if(auth()->user()->checkSpPermission('planning.index'))
+        <li class="{{(Request::is('planning')) ? 'active' : ''}} "><a href="{{ url('/planning/all') }}"><i class="fa fa-truck"></i> <span>{{('Livraison')}}</span></a></li>
+        @endif
+        
       @if(auth()->user()->checkSpPermission('customers.index'))
         <li class="{{(Request::is('customers')) ? 'active' : ''}} "><a href="{{ url('/customers') }}"><i class="fa fa-users"></i> <span>{{trans('menu.customers')}}</span></a></li>
       @endif
@@ -33,12 +37,8 @@
                 <li class="{{(Request::is('receivings/create')) ? 'active' : ''}} "><a href="{{ url('/receivings/create') }}"><i class="fa fa-circle-o"></i> <span>{{__('Créer une Commande')}}</span></a></li>
               @endif
           </ul>
-      </li>
-
-      @if(auth()->user()->checkSpPermission('planning.index'))
-        <li class="{{(Request::is('planning')) ? 'active' : ''}} "><a href="{{ url('/planning/all') }}"><i class="fa fa-truck"></i> <span>{{('Livraison')}}</span></a></li>
-      @endif
-
+</li>
+        
       @endif
       @if(auth()->user()->checkSpPermission('sales.index') || auth()->user()->checkSpPermission('sales.create'))
       <li class="{{(Request::is('sales') || Request::is('sales/create')) ? 'active' : ''}} treeview">

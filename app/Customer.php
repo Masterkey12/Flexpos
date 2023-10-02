@@ -18,9 +18,10 @@ class Customer extends AppModel implements AuthenticatableContract, CanResetPass
 
 
 
-
+    protected $redirectTo = '/home';
     protected $guard_name = 'web_customers';
     protected $table = 'customers';
+    
     const WALKING_CUSTOMER = "Walking Customer";
 
     protected $fillable = ['name', 'email', 'phone_number', 'prev_balance', 'payment','types','password'];

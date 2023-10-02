@@ -38,6 +38,8 @@ class User extends AppModel implements AuthenticatableContract, CanResetPassword
      *
      * @var array
      */
+
+     
     protected $hidden = ['password', 'remember_token'];
 
     public function checkSpPermission($permission_name) {

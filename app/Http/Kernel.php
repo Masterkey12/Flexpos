@@ -37,6 +37,12 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\CheckPermission::class
+            
+        ],
+
+        'web_customers' => [
+            \App\Http\Middleware\AuthenticateCustomers::class,
+            'web',
         ],
 
         'api' => [
@@ -63,5 +69,6 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'client' => \App\Http\Middleware\RedirectIfClient::class,
     ];
 }

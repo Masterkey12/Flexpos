@@ -67,10 +67,6 @@ Route::group(['middleware' => 'languange'], function () {
 
 
 
-
-    Route::post('/customer/login', 'CustomerLoginController@customerLogin')->name('customer-login');
-
-    Route::get('/customer/showlogin', 'CustomerLoginController@showLoginForm')->name('Show-login');
     
 
 
@@ -111,12 +107,23 @@ Route::group(['middleware' => 'languange'], function () {
 
     Route::resource('salepayments', 'SalePaymentController');
     Route::resource('customerpayments', 'CustomerPaymentController');
+
+    Route::post('/customer/login', 'CustomerLoginController@customerLogin')->name('customer-login');
+    Route::get('/customer/showlogin', 'CustomerLoginController@showLoginForm')->name('Show-login');
+
+    Route::get('/products', 'ProductController@index')->name('products.index');
+    Route::post('/orders', 'OrderController@store')->name('orders.store');
+
+
+
 });
 
-Route::post('install/environment/saveNewWizard', [
-    'as' => 'environmentSaveWizard',
-    'uses' => 'NewEnvironmentController@saveEnvWizard'
-]);
+
+
+
+
+
+
 
 Route::get('storage-link', function () {
     Artisan::call('storage:link');

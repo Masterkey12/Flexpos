@@ -94,21 +94,6 @@ trait CommonTrait
         return $ipaddress;
     }
 
-    public function checkIns($user_name, $purchase_code, $product_id)
-    {
-        $client = new Client();
-        $url = config('installer.auri').config('app.owner_url').'/api/veriation';
-        $res = $client->request('POST', $url, [
-            'form_params' => [
-                '_token' => csrf_token(),
-                "user_name"=>$user_name,
-                "purchase_code"=> $purchase_code,
-                "mac"=>$this->getMac(),
-                "product_id"=> $product_id
-            ]
-        ]);
-        return $res;
-    }
 
     public function getInvoiceNo($option=null) {
         if ($option['name'] == 'SALE') {

@@ -77,8 +77,20 @@ class Item extends AppModel
         return $result;
     }
     
-    
+    public function check($saleItems)
+{
+    foreach ($saleItems as $value) {
+        $item = $this->find($value->item_id);
 
+        if ($item->quantity < $value->quantity && $value->quantity !== 0) {
+            return false; // Quantité demandée supérieure à la quantité disponible
+        }
+    }
+
+    return true; // Tous les articles ont un stock suffisant
+}
+
+    
     public function updateItemQty($item_id, $qty, $attribute_id = null)
     {
 
