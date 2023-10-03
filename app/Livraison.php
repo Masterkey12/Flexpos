@@ -9,8 +9,7 @@ class Livraison extends Model
 {
     use HasFactory;
 
-    public function sale()
-    {
-        return $this->belongsTo('App\Sale', 'sale_id', 'id');
+    public function order() {
+        return $this->belongsTo('App\Order', 'order_id' , 'id');
     }
 }

@@ -4,7 +4,7 @@
             <tr>
                 <th class="hidden-xs">{{__('Date de Livraison')}}</th>
                 <th class="hidden-xs">{{__('Adresse de Livraison')}}</th>
-                <th class="hidden-xs">{{('Commandes')}}</th>
+                <th class="hidden-xs">{{('Numéro Commande')}}</th>
                 <th class="text-center">{{__('Action')}}</th>
             </tr>
         </thead>
@@ -13,7 +13,7 @@
             <tr>
                 <td class="hidden-xs">{{ $livraison->date_livraison }}</td>
                 <td>{{$livraison->adresse_livraison}}</td>
-                <td>{{$livraison->sale_id }}</td>
+                <td>{{$livraison->order_id }}</td>
                 <td class="item_btn_group">
                     @php
                     $actions = [

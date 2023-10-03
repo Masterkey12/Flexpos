@@ -120,6 +120,8 @@ Route::group(['middleware' => 'languange'], function () {
 
     Route::get('/payment-history', 'PaymentController@index')->name('payment.history');
     Route::get('/admin/orders', 'AdminController@getOrders')->name('admin.orders');
+    Route::post('/orders', 'OrderController@store')->name('orders.store');
+
 
 
 

@@ -19,10 +19,11 @@
                     <td>{{ $order->quantity }}</td>
                     <td>
                     @if($order->proof_of_payment)
-    <a href="{{ asset('storage/' . $order->proof_of_payment) }}" target="_blank">Voir la preuve de paiement</a>
+    <a href="{{ asset('/storage/' . $order->proof_of_payment) }}" download> Télécharger la preuve de paiement</a>
 @else
     Aucune preuve de paiement disponible
 @endif
+
                     </td>
                 </tr>
             @endforeach

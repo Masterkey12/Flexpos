@@ -18,11 +18,11 @@
                 {{ Form::textarea('motif_de_livraison', null, ['class' => 'form-control', 'rows'=>4]) }}
                 </div
             <div class="form-group">
-            {{ Form::label('sale_id', ('Numero de Commandes'), ['class' => 'col-sm-12 ']) }}
-                <select autocomplete="off" class="form-control select2" name="sale_id">
+            {{ Form::label('order_id', ('Numero de Commandes'), ['class' => 'col-sm-12 ']) }}
+                <select autocomplete="off" class="form-control select2" name="order_id">
                     <option value="">Selectionner le numero de Commande</option>
-                    @foreach($sales as $sale)
-                <option value="{{ $sale->id }}">{{ $sale->id }} - {{ $sale->nom_client }}</option>
+                    @foreach($orders as $order)
+                <option value="{{ $order->id }}">{{ $order->id }} - {{ $order->name }}</option>
                 @endforeach
                 </select>
             </div>

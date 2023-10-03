@@ -14,11 +14,12 @@ class CreateLivraisonsTable extends Migration
     public function up()
     {
         Schema::create('livraisons', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->date('date_livraison');
             $table->string('adresse_livraison');
-            $table->integer('sale_id')->unsigned()->nullable();
-			$table->foreign('sale_id')->references('id')->on('sales')->onDelete('restrict');
+            $table->string('motif_de_livraison')->nullable();
+            $table->unsignedBigInteger('order_id')->unsigned();
+			$table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
+use App\Order;
 use App\Livraison;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,19 +17,19 @@ class PlanningController extends Controller
      */
 
 
-     public function __construct( Sale $sale)
+     public function __construct( Order $order)
     {
         $this->middleware('auth');
-        $this->sale = $sale;
+        $this->order = $order;
     }
 
     public function index()
     {
         $livraisons = Livraison::all();
-        $data['sales'] = $this->sale->all();
-        return view('planning.index', ['livraisons' => $livraisons], $data);
-        
+        $data['orders'] = $this->order->all();
+        return view('planning.index', ['livraisons' => $livraisons] + $data);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +38,7 @@ class PlanningController extends Controller
      */
     public function create()
     {
-        $data['sales'] = $this->sale->all();
+        $data['orders'] = $this->order->all();
         return view('planning.create' , $data);
     }
 
@@ -102,7 +103,7 @@ class PlanningController extends Controller
     $validator = Validator::make($request->all(), [
         'date_livraison' => '',
         'adresse_livraison' => '',
-        'sale_id' => '',
+        'order_id' => '',
         'motif_de_livraison' => '',
     ]);
 
@@ -113,7 +114,7 @@ class PlanningController extends Controller
     $livraison = new Livraison();
     $livraison->date_livraison = $request->input('date_livraison');
     $livraison->adresse_livraison = $request->input('adresse_livraison');
-    $livraison->sale_id = $request->input('sale_id');
+    $livraison->order_id = $request->input('order_id');
     $livraison->motif_de_livraison = $request->input('motif_de_livraison');
     $livraison->save();
 
@@ -123,7 +124,7 @@ class PlanningController extends Controller
 
 public function afficherPlanification()
 {
-    $livraisons = Livraison::with('sale.customer')->get();
+    $livraisons = Livraison::with('order.customer')->get();
 
     $events = [];
     foreach ($livraisons as $livraison) {
@@ -133,8 +134,8 @@ public function afficherPlanification()
             'end' => $livraison->date_livraison, 
             'motif'=>$livraison->motif_de_livraison,
             'adresse' => $livraison->adresse_livraison,
-            'sale_id' => $livraison->sale_id,
-            'nom_client' => $livraison->sale->customer->name,
+            'order_id' => $livraison->order_id,
+            'nom_client' => $livraison->order->customer->name,
         ];
     }
 
